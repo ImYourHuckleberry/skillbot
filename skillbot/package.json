@@ -1,0 +1,35 @@
+{
+  "name": "slackbot",
+  "version": "1.0.0",
+  "description": "slackbot demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team 3",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "mongodb": "^3.1.13",
+    "mysql": "^2.16.0",
+    "request": "^2.88.0",
+    "slack": "^11.0.1",
+    "slackbots": "^1.2.0"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://christopherjensen@bitbucket.org/wtk1202/skillbot.git"
+  },
+  "keywords": [
+    "slack",
+    "bot",
+    "du",
+    "daugherty"
+  ],
+  "homepage": "https://bitbucket.org/wtk1202/skillbot#readme"
+  
+}
