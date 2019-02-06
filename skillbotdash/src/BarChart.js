@@ -37,7 +37,7 @@ class BarChart extends Component {
       <VictoryChart
       width={1000} 
       height={500}
-      theme={VictoryTheme.material}
+      
       domainPadding={20}
       padding={{  top: 30, bottom: 30,left: 200, right: 100 }}
       
@@ -53,7 +53,7 @@ class BarChart extends Component {
           data={skillData}
           sortKey="y"
           x="name"
-          labels={(skillData) => `count: ${skillData.skills.length}`}
+          labels={(skillData) => `Skill Count: ${skillData.skills.length}`}
           y={skillData => skillData.skills.length}
         />
         
@@ -73,7 +73,7 @@ class BarChart extends Component {
       <VictoryChart
       width={1000} 
       height={1000}
-      theme={VictoryTheme.material}
+   
       domainPadding={20}
       padding={{  top: 30, bottom: 30,left: 200, right: 100 }}
       
@@ -86,7 +86,7 @@ class BarChart extends Component {
           onLoad: { duration: 1000 }
         }}
         style={{ data: { fill: "#c43a31" } }}
-        labels={(d) => `count: ${d.count}`}
+        labels={(d) => `Frequency: ${d.count}`}
           data={counted}
           sortKey="y"
           x="name"
@@ -101,7 +101,7 @@ class BarChart extends Component {
 }
 
 const mapStatetoProps = state => ({
-  skillData: state.data
+  skillData: state.reducer.data
 });
 
 export default connect(mapStatetoProps)(BarChart);

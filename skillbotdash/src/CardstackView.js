@@ -49,7 +49,7 @@ class CardstackView extends Component {
 {filtered.length>0||skill_filter.length>0 ?  
 
 
-<div className="user-breakdown">
+<div className="user-breakdown" style={{margin:"20px"}}>
 {skillFilter.map((data, index) => (
   <div
     key={data.name}
@@ -196,9 +196,9 @@ class CardstackView extends Component {
   }
 }
 const mapStateToProps = state => ({
-  skillData: state.data,
-  isFetching: state.isFetching,
-  filtered:state.filtered,
-  skill_filter:state.skill_filtered
+  skillData: state.reducer.data,
+  isFetching: state.reducer.isFetching,
+  filtered:state.reducer.filtered,
+  skill_filter:state.reducer.skill_filtered
 });
 export default connect(mapStateToProps)(CardstackView);

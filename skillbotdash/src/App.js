@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { connect } from "react-redux";
-import { VictoryBar, VictoryTheme, VictoryChart, VictoryPie } from "victory";
 
+import MyForm from "./MyForm"
 import CardstackView from "./CardstackView.js";
 import PieChart from "./PieChart";
 import BarChart from "./BarChart";
 import Search from "./Search"
 import Scatter from "./Scatter"
+
+
 class App extends Component {
   componentDidMount() {
     this.getData();
@@ -16,7 +18,7 @@ class App extends Component {
 
   getData = () => {
     const { dispatch } = this.props;
-    const url = "/notes/";
+    const url = "/notes";
     dispatch({
       type: "FETCH_DATA"
     });
@@ -38,15 +40,17 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          {/* <div>USER SKILL PIE CHART</div>
-          <PieChart /> */}
-          {/* <Scatter/> */}
+          
           <BarChart />
-          <div>
+          <div style={{margin:"5%"}}>
           <Search />
           <CardstackView />
+          
+          
           </div>
+          
         </header>
+        <div><MyForm/></div>
       </div>
     );
   }

@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
     "axios": "^0.18.0",
+    "formik": "^1.4.3",
+    "material-ui": "^0.20.2",
+    "mongodb": "^3.1.13",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-cardstack": "^1.1.0",
@@ -14,7 +18,9 @@
     "react-tippy": "^1.2.3",
     "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
-    "victory": "^31.2.0"
+    "redux-form": "^8.1.0",
+    "victory": "^31.2.0",
+    "yup": "^0.26.10"
   },
   "proxy": "http://localhost:8000",
   "scripts": {
