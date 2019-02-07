@@ -1,9 +1,9 @@
 import React from "react";
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm } from "redux-form";
 
 const makePost = values => {
-console.log(values)
-console.log(JSON.stringify(values))
+  console.log(values);
+  console.log(JSON.stringify(values));
   fetch("/notes", {
     method: "POST",
     headers: {
@@ -13,13 +13,14 @@ console.log(JSON.stringify(values))
     body: JSON.stringify({
       values
     })
-  }).then((res) => {
-    console.log("this is res", res)
-  }).catch((err) => {
-    console.log(err)
-  });
+  })
+    .then(res => {
+      console.log("this is res", res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
-
 
 // const MyForm = ({ handleSubmit }) => (
 //   <form onSubmit={handleSubmit}>
@@ -32,101 +33,149 @@ console.log(JSON.stringify(values))
 //   </form>
 // );
 
-
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
     <div>
-      <label>{label}</label>
-      <div>
-        <input {...input} type={type} placeholder={label} />
-        {touched && error && <span>{error}</span>}
-      </div>
+      <input {...input} type={type} placeholder={label} />
+      {touched && error && <span>{error}</span>}
     </div>
-  )
+  </div>
+);
 
-  
-  
-  const renderProficiency = ({ fields, meta: { error } }) => (
-    <ul>
-      <li>
-        <button type="button" onClick={() => fields.push()}>
-          Add proficiency
-        </button>
+
+const renderProficiencyButtons = ({ fields, meta: { error } }) => (
+  <ul>
+    <li>
+      <button type="button" onClick={() => fields.push()}>
+        Add proficiency
+      </button>
+    </li>
+    {fields.map((proficiency, index) => (
+      <li key={index}>
+        <button
+          type="button"
+          title="Remove proficiency"
+          onClick={() => fields.remove(index)}
+        />
+        <div>
+        <label>proficiency</label>
+        <div>
+          <label>
+            <Field
+              name={`${proficiency}.proficiency`}
+              component="input"
+              type="radio"
+              value="beginner"
+            />{' '}
+            Beginner
+          </label>
+          <label>
+            <Field
+              name={`${proficiency}.proficiency`}
+              component="input"
+              type="radio"
+              value="intermediate"
+            />{' '}
+            Intermediate
+          </label>
+          <label>
+            <Field
+              name={`${proficiency}.proficiency`}
+              component="input"
+              type="radio"
+              value="expert"
+            />{' '}
+            Expert
+          </label>
+       
+        </div>
+        </div>
       </li>
-      {fields.map((proficiency, index) => (
-        <li key={index}>
-          <button
-            type="button"
-            title="Remove proficiency"
-            onClick={() => fields.remove(index)}
-          />
-          <Field
-            name={proficiency}
-            type="text"
-            component={renderField}
-            label={`proficiency #${index + 1}`}
-          />
-        </li>
-      ))}
-      {error && <li className="error">{error}</li>}
-    </ul>
-  )
-  
+    ))}
+    {error && <li className="error">{error}</li>}
+  </ul>
+);
 
+// const renderProficiency = ({ fields, meta: { error } }) => (
+//   <ul>
+//     <li>
+//       <button type="button" onClick={() => fields.push()}>
+//         Add proficiency
+//       </button>
+//     </li>
+//     {fields.map((proficiency, index) => (
+//       <li key={index}>
+//         <button
+//           type="button"
+//           title="Remove proficiency"
+//           onClick={() => fields.remove(index)}
+//         />
+//         <Field
+//           name={proficiency}
+//           type="text"
+//           component={renderField}
+//           label="Proficiency"
+//         />
+//       </li>
+//     ))}
+//     {error && <li className="error">{error}</li>}
+//   </ul>
+// );
 
-  const renderSkills = ({ fields, meta: { error, submitFailed } }) => (
-    <ul>
-      <li>
-        <button type="button" onClick={() => fields.push({})}>
-          Add skill
-        </button>
-        {submitFailed && error && <span>{error}</span>}
-      </li>
-      {fields.map((skill, index) => (
-        <li key={index}>
-          <button
-            type="button"
-            title="Remove skill"
-            onClick={() => fields.remove(index)}
-          />
-          <h4>skill #{index + 1}</h4>
-          <Field
-            name={`${skill}.skills`}
-            type="text"
-            component={renderField}
-            label="Skill"
-          />
-          
-          <FieldArray name={`${skill}.proficiency`} component={renderProficiency} />
-        </li>
-      ))}
-    </ul>
-  )
-  
-  
-  const FieldArraysForm = props => {
-    const { handleSubmit, pristine, reset, submitting } = props
-    return (
-      <form onSubmit={handleSubmit}>
+const renderSkills = ({ fields, meta: { error, submitFailed } }) => (
+  <ul>
+    <li>
+      <button type="button" onClick={() => fields.push({})}>
+        Add skill
+      </button>
+      {submitFailed && error && <span>{error}</span>}
+    </li>
+    {fields.map((skill, index) => (
+      <li key={index}>
+        <button
+          type="button"
+          title="Remove skill"
+          onClick={() => fields.remove(index)}
+        />
+        <h4>skill #{index + 1}</h4>
         <Field
-          name="name"
+          name={`${skill}.skills`}
           type="text"
           component={renderField}
-          label="Name"
+          label="Skill"
         />
-        <FieldArray name="skills" component={renderSkills} />
-        <div>
-          <button type="submit" disabled={submitting}>
-            Submit
-          </button>
-          <button type="button" disabled={pristine || submitting} onClick={reset}>
-            Clear Values
-          </button>
-        </div>
-      </form>
-    )
-  }
-  
+        <FieldArray
+          name={`${skill}.proficiency`}
+          component={renderProficiencyButtons}
+        />
 
+        {/* <FieldArray
+          name={`${skill}.proficiency`}
+          component={renderProficiency}
+        /> */}
+      </li>
+    ))}
+  </ul>
+);
+
+const FieldArraysForm = props => {
+  const { handleSubmit, pristine, reset, submitting } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <Field name="name" type="text" component={renderField} label="Name" />
+      <FieldArray name="skills" component={renderSkills} />
+      <div>
+        <button type="submit" disabled={submitting}>
+          Submit
+        </button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default reduxForm({
   form: "UserForm",
@@ -147,10 +196,6 @@ export default reduxForm({
 //current engagement
 //pastengagements
 //notes
-
-
-
-
 
 // import React from "react";
 // import { Field, FieldArray, reduxForm } from 'redux-form'
@@ -174,7 +219,6 @@ export default reduxForm({
 //   });
 // };
 
-
 // // const MyForm = ({ handleSubmit }) => (
 // //   <form onSubmit={handleSubmit}>
 // //     <Field name="name" component="input" placeholder="Name" />
@@ -186,7 +230,6 @@ export default reduxForm({
 // //   </form>
 // // );
 
-
 // const renderField = ({ input, label, type, meta: { touched, error } }) => (
 //     <div>
 //       <label>{label}</label>
@@ -196,7 +239,7 @@ export default reduxForm({
 //       </div>
 //     </div>
 //   )
-  
+
 //   const renderHobbies = ({ fields, meta: { error } }) => (
 //   <ul>
 //     <li>
@@ -222,7 +265,7 @@ export default reduxForm({
 //     {error && <li className="error">{error}</li>}
 //   </ul>
 // )
-  
+
 //   const renderSkills = ({ fields, meta: { error, submitFailed } }) => (
 //     <ul>
 //       <li>
@@ -245,13 +288,12 @@ export default reduxForm({
 //             component={renderField}
 //             label="Skill"
 //           />
-          
-          
+
 //         </li>
 //       ))}
 //     </ul>
 //   )
-  
+
 //   const FieldArraysForm = props => {
 //     const { handleSubmit, pristine, reset, submitting } = props
 //     return (
@@ -274,8 +316,6 @@ export default reduxForm({
 //       </form>
 //     )
 //   }
-  
-
 
 // export default reduxForm({
 //   form: "UserForm",

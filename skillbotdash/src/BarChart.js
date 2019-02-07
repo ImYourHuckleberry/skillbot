@@ -13,6 +13,9 @@ class BarChart extends Component {
     
     const getAllSkills = skillData.map(data=>(data.skills.map(skills=>(skillArray.push(skills.skills)))))
     
+    const howManySkills=()=>skillData.map(skills=>skills.skills.map(skill=>skill.skills))
+
+
     let counted = []
     for (let c of skillArray) {
       const alreadyCounted = counted.map(c => c.name)
@@ -26,10 +29,10 @@ class BarChart extends Component {
       type:"LOAD_SKILL_COUNT_ARRAY",
       payload: counted
     })
-
-    console.log(skillArray)
-    console.log(counted)
-    
+// console.log(getAllSkills)
+//     console.log(skillArray)
+//     console.log(counted)
+    console.log(howManySkills())
     return (
       <div>
       <div style={{ display: "flex", flexWrap: "wrap", width:"1500px"}}>
