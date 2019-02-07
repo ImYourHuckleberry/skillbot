@@ -62,7 +62,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
           >remove skill</button>
           <h4>Skill #{index + 1}</h4>
           <Field
-            name={`${skill}.skill`}
+            name={`${skill}`}
             type="text"
             component={renderField}
             label="Skill"
