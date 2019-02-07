@@ -5,10 +5,12 @@ import { connect } from "react-redux";
 
 import MyForm from "./MyForm"
 import CardstackView from "./CardstackView.js";
-import PieChart from "./PieChart";
+
 import BarChart from "./BarChart";
 import Search from "./Search"
-import Scatter from "./Scatter"
+
+import { VictoryStack } from "victory";
+import BarStack from "./BarStack";
 
 
 class App extends Component {
@@ -40,7 +42,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          
+          <BarStack/>
           <BarChart />
           <div style={{margin:"5%"}}>
           <Search />
