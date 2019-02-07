@@ -11,7 +11,7 @@ class BarChart extends Component {
     const { skillData,dispatch } = this.props;
     let skillArray=[]
     
-    const getAllSkills = skillData.map(data=>(data.skills.map(skills=>(skillArray.push(skills)))))
+    const getAllSkills = skillData.map(data=>(data.skills.map(skills=>(skillArray.push(skills.skills)))))
     
     let counted = []
     for (let c of skillArray) {
