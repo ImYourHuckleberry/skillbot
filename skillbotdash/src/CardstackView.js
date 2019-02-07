@@ -37,9 +37,9 @@ class CardstackView extends Component {
       (first, second) => first.name.localeCompare(second.name)
      );
 
-    // const skillFilter = skillData.filter(data=>data.skills.toString().includes(filtered)||data.name.includes(filtered))
-      
-    const skillFilter = skillData.filter(data=>data.skills.toString().includes(filtered)||data.name.includes(filtered))
+    const skillFilter = skillData.filter(data=>data.skills.map(skill=>skill.skills).toString().includes(filtered)||data.name.includes(filtered))
+
+ //   const skillFilter = skillData.filter(data=>data.skills.toString().includes(filtered)||data.name.includes(filtered))
      
     return (
       <div>SKILL BREAKDOWN BY USER
@@ -109,9 +109,9 @@ class CardstackView extends Component {
             textAlign:"left"
           }}
         >
-          {data.skills.map(skill => (
-            <div style={{ width: "20%" }}>{skill.skills}</div>
-          ))}
+         {data.skills.map(skills => (
+                      <div className="cardStackSkillProf"><div>{skills.skills}</div><div>{skills.proficiency[0].proficiency}</div></div>
+                    ))}
         </div>
       </div>
     ) : (
@@ -180,9 +180,10 @@ class CardstackView extends Component {
                       textAlign:"left"
                     }}
                   >
-                    {data.skills.map(skill => (
-                      <div style={{ width: "20%" }}>{skill.skills}</div>
+                    {data.skills.map(skills => (
+                      <div className="cardStackSkillProf"><div>{skills.skills}</div><div>{skills.proficiency[0].proficiency}</div></div>
                     ))}
+                    
                   </div>
                 </div>
               ) : (
